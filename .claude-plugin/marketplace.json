@@ -828,6 +828,17 @@
         "sha": "4b1fb10bd707a22cf0cdfad5374ffc885f2ffa8d"
       },
       "homepage": "https://www.sanity.io"
+    },
+    {
+      "name": "data",
+      "description": "Data engineering for Apache Airflow and Astronomer. Author DAGs with best practices, debug pipeline failures, trace data lineage, profile tables, migrate Airflow 2 to 3, and manage local and cloud deployments.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/astronomer/agents.git",
+        "sha": "7ef022b02f5296b5ecc52ba0db3ba9345ec03c9e"
+      },
+      "homepage": "https://github.com/astronomer/agents"
     }
   ]
 }
