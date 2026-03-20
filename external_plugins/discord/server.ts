@@ -423,7 +423,7 @@ const mcp = new Server(
       '',
       'Messages from Discord arrive as <channel source="discord" chat_id="..." message_id="..." user="..." ts="...">. If the tag has attachment_count, the attachments attribute lists name/type/size — call download_attachment(chat_id, message_id) to fetch them. Reply with the reply tool — pass chat_id back. Use reply_to (set to a message_id) only when replying to an earlier message; the latest message doesn\'t need a quote-reply, omit reply_to for normal responses.',
       '',
-      'reply accepts file paths (files: ["/abs/path.png"]) for attachments. Use react to add emoji reactions, and edit_message to update a message you previously sent (e.g. progress → result).',
+      'reply accepts file paths (files: ["/abs/path.png"]) for attachments. Use react to add emoji reactions, and edit_message for interim progress updates. Edits don\'t trigger push notifications — when a long task completes, send a new reply so the user\'s device pings.',
       '',
       "fetch_messages pulls real Discord history. Discord's search API isn't available to bots — if the user asks you to find an old message, fetch more history or ask them roughly when it was.",
       '',
@@ -471,7 +471,7 @@ mcp.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: 'edit_message',
-      description: 'Edit a message the bot previously sent. Useful for progress updates (send "working…" then edit to the result).',
+      description: 'Edit a message the bot previously sent. Useful for interim progress updates. Edits don\'t trigger push notifications — send a new reply when a long task completes so the user\'s device pings.',
       inputSchema: {
         type: 'object',
         properties: {
