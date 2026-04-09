@@ -19,11 +19,16 @@ claude-plugins-official/
 
 ### Internal Plugins (`/plugins`)
 
-32 plugins including: `agent-sdk-dev`, `plugin-dev`, `feature-dev`, `hookify`, `example-plugin`, `code-review`, `commit-commands`, `frontend-design`, `security-guidance`, various LSP plugins (`typescript-lsp`, `pyright-lsp`, `rust-analyzer-lsp`, etc.), and more.
+32 plugins organized into categories:
+
+- **Development tools**: `agent-sdk-dev`, `claude-code-setup`, `claude-md-management`, `code-review`, `code-simplifier`, `commit-commands`, `feature-dev`, `frontend-design`, `hookify`, `mcp-server-dev`, `playground`, `plugin-dev`, `pr-review-toolkit`, `security-guidance`, `skill-creator`
+- **LSP plugins** (12): `clangd-lsp`, `csharp-lsp`, `gopls-lsp`, `jdtls-lsp`, `kotlin-lsp`, `lua-lsp`, `php-lsp`, `pyright-lsp`, `ruby-lsp`, `rust-analyzer-lsp`, `swift-lsp`, `typescript-lsp`
+- **Output styles**: `explanatory-output-style`, `learning-output-style`
+- **Specialized**: `example-plugin`, `math-olympiad`, `ralph-loop`
 
 ### External Plugins (`/external_plugins`)
 
-17 plugins including: `github`, `slack`, `asana`, `linear`, `discord`, `firebase`, `supabase`, `playwright`, `terraform`, `imessage`, and more.
+17 third-party plugins: `asana`, `context7`, `discord`, `fakechat`, `firebase`, `github`, `gitlab`, `greptile`, `imessage`, `laravel-boost`, `linear`, `playwright`, `serena`, `slack`, `supabase`, `telegram`, `terraform`
 
 ### Reference Plugins
 
@@ -145,9 +150,17 @@ tools: ["Write", "Read"]
 
 Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `SessionStart`, `SessionEnd`, `UserPromptSubmit`, `PreCompact`, `Notification`.
 
+### Plugins with Agents
+
+7 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`, `skill-creator`.
+
+### Plugins with Hooks
+
+5 plugins use the hook system: `explanatory-output-style`, `hookify`, `learning-output-style`, `ralph-loop`, `security-guidance`.
+
 ## Marketplace Configuration
 
-`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. Entries must be:
+`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **123 registered plugins** — the 49 local plugins plus 74 externally-hosted plugins referenced by URL or git subdirectory. Entries must be:
 
 - **Alphabetically sorted** by `name` (case-insensitive)
 - Each entry requires: `name`, `description`, `source`
@@ -253,6 +266,14 @@ cc --plugin-dir /path/to/plugin
 
 No packaging or restart required — changes to plugin files are picked up automatically.
 
+### Installing a Plugin
+
+```bash
+cc /plugin install {plugin-name}@claude-plugins-official
+```
+
+Or browse available plugins via `/plugin > Discover` in Claude Code.
+
 ### Validating All Changes Before Push
 
 ```bash
@@ -260,3 +281,8 @@ bun .github/scripts/validate-marketplace.ts .claude-plugin/marketplace.json
 bun .github/scripts/check-marketplace-sorted.ts
 bun .github/scripts/validate-frontmatter.ts <changed-frontmatter-files>
 ```
+
+## Additional Resources
+
+- [Official Plugin Documentation](https://code.claude.com/docs/en/plugins)
+- [Plugin Directory Submission Form](https://clau.de/plugin-directory-submission) (for external contributors)
