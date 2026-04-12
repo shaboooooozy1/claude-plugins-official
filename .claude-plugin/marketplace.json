@@ -1276,6 +1276,17 @@
       "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/supabase"
     },
     {
+      "name": "super-app",
+      "description": "Unified super app combining real-time web search, fact-checking, financial analysis, research, and knowledge retrieval with productivity integrations (Notion, Gmail, Calendar, CRM, design tools)",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/super-app",
+      "category": "productivity",
+      "homepage": "https://github.com/shaboooooozy1/claude-plugins-official/tree/main/plugins/super-app"
+    },
+    {
       "name": "superpowers",
       "description": "Superpowers teaches Claude brainstorming, subagent driven development with built in code review, systematic debugging, and red/green TDD. Additionally, it teaches Claude how to author and test new skills.",
       "category": "development",

@@ -1,0 +1,9 @@
+{
+  "name": "super-app",
+  "description": "Unified super app combining real-time web search, fact-checking, financial analysis, research, and knowledge retrieval with productivity integrations (Notion, Gmail, Calendar, CRM, design tools)",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  },
+  "version": "1.0.0"
+}
