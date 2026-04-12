@@ -32,8 +32,8 @@ claude-plugins-official/
 
 ### Reference Plugins
 
-- **`plugins/example-plugin`** — Minimal reference implementation demonstrating all plugin features
-- **`plugins/plugin-dev`** — Comprehensive plugin development toolkit with 7 skills and full documentation
+- **`plugins/example-plugin`** — Minimal reference implementation demonstrating all plugin features (not registered in `marketplace.json`)
+- **`plugins/plugin-dev`** — Comprehensive plugin development toolkit with 7 skills (`agent-development`, `command-development`, `hook-development`, `mcp-integration`, `plugin-settings`, `plugin-structure`, `skill-development`)
 
 ## Plugin Structure
 
@@ -152,7 +152,7 @@ Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `Session
 
 ### Plugins with Agents
 
-7 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`, `skill-creator`.
+6 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`.
 
 ### Plugins with Hooks
 
@@ -160,22 +160,31 @@ Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `Session
 
 ## Marketplace Configuration
 
-`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **123 registered plugins** — the 49 local plugins plus 74 externally-hosted plugins referenced by URL or git subdirectory. Entries must be:
+`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **123 registered plugins**:
 
+- **48 local entries** pointing to directories in this repo (31 in `/plugins`, 17 in `/external_plugins`)
+- **75 externally-hosted entries** (60 `url`, 14 `git-subdir`, 1 `github`)
+
+Note: `plugins/example-plugin` exists as a reference implementation and is intentionally **not** registered in `marketplace.json`.
+
+Entries must be:
 - **Alphabetically sorted** by `name` (case-insensitive)
 - Each entry requires: `name`, `description`, `source`
 - Optional fields: `category`, `author`, `homepage`
 
 Source types:
 ```jsonc
-// Local plugin
+// Local plugin (string form)
 "source": "./plugins/plugin-name"
 
-// External git repo
+// External git repo with pinned sha
 "source": { "source": "url", "url": "https://github.com/org/repo.git", "sha": "..." }
 
-// Git subdirectory
+// Git subdirectory (plugin lives inside a larger repo)
 "source": { "source": "git-subdir", "url": "org/repo", "path": "plugins/name", "ref": "main", "sha": "..." }
+
+// GitHub shorthand
+"source": { "source": "github", "repo": "org/repo" }
 ```
 
 ## CI/CD & Validation
