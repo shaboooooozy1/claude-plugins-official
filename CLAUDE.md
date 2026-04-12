@@ -33,7 +33,14 @@ claude-plugins-official/
 ### Reference Plugins
 
 - **`plugins/example-plugin`** — Minimal reference implementation demonstrating all plugin features
-- **`plugins/plugin-dev`** — Comprehensive plugin development toolkit with 7 skills and full documentation
+- **`plugins/plugin-dev`** — Comprehensive plugin development toolkit with 7 skills covering every plugin component:
+  - `agent-development` — authoring autonomous agents
+  - `command-development` — authoring slash commands
+  - `hook-development` — writing lifecycle hooks
+  - `mcp-integration` — configuring MCP servers
+  - `plugin-settings` — plugin.json and configuration
+  - `plugin-structure` — directory layout and conventions
+  - `skill-development` — authoring skills with progressive disclosure
 
 ## Plugin Structure
 
@@ -112,23 +119,50 @@ tools: ["Write", "Read"]
 ---
 ```
 
+The `tools` field accepts either a YAML array (`["Read", "Write"]`) or a comma-separated string (`Read, Write, Grep`). Both forms appear in existing agents — see `plugins/plugin-dev/agents/agent-creator.md` (array form) and `plugins/feature-dev/agents/code-reviewer.md` (string form).
+
 ### .mcp.json Format
 
+Three transport types are used in this repo:
+
+**HTTP** (most common for hosted services — e.g., `external_plugins/github`, `external_plugins/slack`):
 ```json
 {
   "server-name": {
     "type": "http",
-    "url": "https://example.com/mcp",
-    "oauth": {
-      "clientId": "...",
-      "callbackPort": 3118
+    "url": "https://api.example.com/mcp/",
+    "headers": {
+      "Authorization": "Bearer ${TOKEN_ENV_VAR}"
     }
   }
 }
 ```
 
+**SSE** (server-sent events — e.g., `external_plugins/asana`):
+```json
+{
+  "asana": {
+    "type": "sse",
+    "url": "https://mcp.asana.com/sse"
+  }
+}
+```
+
+**Command** (local stdio process — e.g., `external_plugins/playwright`, `external_plugins/serena`, `external_plugins/context7`):
+```json
+{
+  "playwright": {
+    "command": "npx",
+    "args": ["@playwright/mcp@latest"]
+  }
+}
+```
+
+OAuth can be configured on HTTP servers with an `oauth` object containing `clientId` and `callbackPort`. Use `${ENV_VAR}` interpolation for secrets — never hardcode tokens.
+
 ### hooks.json Format
 
+Basic structure with a command hook:
 ```json
 {
   "description": "Hook description",
@@ -147,6 +181,25 @@ tools: ["Write", "Read"]
   }
 }
 ```
+
+**Tool matchers** — limit a hook to specific tools (see `plugins/security-guidance/hooks/hooks.json`):
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [{ "type": "command", "command": "...", "timeout": 10 }]
+      }
+    ]
+  }
+}
+```
+
+**Hook script conventions** (see `plugins/hookify/hooks/pretooluse.py` for a full example):
+- Read event JSON from stdin, write result JSON to stdout
+- Exit 0 for non-blocking behavior; non-zero blocks the tool call
+- Use `${CLAUDE_PLUGIN_ROOT}` in `command` so paths remain portable
 
 Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `SessionStart`, `SessionEnd`, `UserPromptSubmit`, `PreCompact`, `Notification`.
 
@@ -178,6 +231,12 @@ Source types:
 "source": { "source": "git-subdir", "url": "org/repo", "path": "plugins/name", "ref": "main", "sha": "..." }
 ```
 
+### Marketplace Categories
+
+Current entries use 13 canonical category values — reuse these rather than inventing new ones:
+
+`automation`, `database`, `deployment`, `design`, `development`, `learning`, `location`, `math`, `migration`, `monitoring`, `productivity`, `security`, `testing`
+
 ## CI/CD & Validation
 
 All CI runs on **Bun** runtime. Three GitHub Actions workflows enforce quality:
@@ -186,16 +245,23 @@ All CI runs on **Bun** runtime. Three GitHub Actions workflows enforce quality:
 
 Triggered on changes to `**/agents/*.md`, `**/skills/*/SKILL.md`, `**/commands/*.md`.
 
-Validation rules:
-- **Agents**: Must have `name` (string) and `description` (string)
-- **Skills**: Must have `description` or `when_to_use`
-- **Commands**: Must have `description` (string)
+File type is detected by path:
+- Path contains `/agents/` and is not nested inside a skill → **agent**
+- Path ends with `/skills/<name>/SKILL.md` (basename must be exactly `SKILL.md`) → **skill**
+- Path contains `/commands/` and is not nested inside a skill → **command**
 
-YAML special characters (`* & # ! | > % @ {} []`) must be quoted in frontmatter values.
+Validation rules (from `.github/scripts/validate-frontmatter.ts`):
+- **Agents**: ERROR if missing `name` (string) or `description` (string)
+- **Skills**: ERROR if missing both `description` AND `when_to_use` (at least one required)
+- **Commands**: ERROR if missing `description` (string)
+
+The script auto-quotes YAML flow indicators, anchors, comments, tags, and block scalar indicators (`{} [] * & # ! | > % @ \``) before parsing, but unquoted values containing these characters will still fail if they break YAML parsing in other ways — quote them explicitly.
 
 Run locally:
 ```bash
 bun .github/scripts/validate-frontmatter.ts <file1> [file2...]
+# or scan a directory
+bun .github/scripts/validate-frontmatter.ts plugins/my-plugin
 ```
 
 ### 2. Marketplace Validation (`validate-marketplace.yml`)
@@ -281,6 +347,21 @@ bun .github/scripts/validate-marketplace.ts .claude-plugin/marketplace.json
 bun .github/scripts/check-marketplace-sorted.ts
 bun .github/scripts/validate-frontmatter.ts <changed-frontmatter-files>
 ```
+
+## Troubleshooting CI Failures
+
+**"Marketplace is not sorted alphabetically"** — Auto-fix with:
+```bash
+bun .github/scripts/check-marketplace-sorted.ts --fix
+```
+
+**"Duplicate plugin name in marketplace.json"** — Two entries share the same `name`. Each plugin name must be unique across the entire marketplace, including between `plugins/` and `external_plugins/`.
+
+**"Missing required field: description"** in frontmatter — The YAML frontmatter block must be delimited by `---\n` on its own lines at the very top of the file. A missing opening or closing delimiter will cause the parser to skip validation. For skills, either `description` or `when_to_use` satisfies the requirement.
+
+**"YAML parse error"** in frontmatter — A value contains an unquoted special character. Quote the value with double quotes, especially for descriptions starting with `*`, `&`, `#`, `!`, `|`, `>`, `%`, `@`, or containing `{}`, `[]`, or `:` followed by a space.
+
+**"External PR closed automatically"** — The `close-external-prs.yml` workflow closes PRs from users without write/admin access. External contributors must use the [plugin directory submission form](https://clau.de/plugin-directory-submission) instead.
 
 ## Additional Resources
 
