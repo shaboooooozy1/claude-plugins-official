@@ -53,7 +53,7 @@
     },
     {
       "name": "aikido",
-      "description": "Aikido Security scanning for Claude Code \u2014 SAST, secrets, and IaC vulnerability detection powered by the Aikido MCP server.",
+      "description": "Aikido Security scanning for Claude Code — SAST, secrets, and IaC vulnerability detection powered by the Aikido MCP server.",
       "source": {
         "source": "url",
         "url": "https://github.com/AikidoSec/aikido-claude-plugin.git",
@@ -72,6 +72,17 @@
         "ref": "main"
       },
       "homepage": "https://github.com/awslabs/agent-plugins"
+    },
+    {
+      "name": "amplitude",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/amplitude/mcp-marketplace.git",
+        "sha": "be54ccb66b10593721dd3a31e47b2db20ea02d2f"
+      },
+      "description": "Use Amplitude as an expert analyst — instrument Amplitude, discover product opportunities, analyze charts, create dashboards, manage experiments, and understand users and accounts.",
+      "category": "monitoring",
+      "homepage": "https://github.com/amplitude/mcp-marketplace"
     },
     {
       "name": "asana",
@@ -148,6 +159,28 @@
       "homepage": "https://github.com/awslabs/agent-plugins"
     },
     {
+      "name": "azure-cosmos-db-assistant",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/AzureCosmosDB/cosmosdb-claude-code-plugin.git",
+        "sha": "56e6da0cae93cdee8bcfa5e624ecdd9a0a483181"
+      },
+      "description": "Expert assistant for Azure Cosmos DB — data modeling, query optimization, performance tuning, and best practices.",
+      "category": "database",
+      "homepage": "https://github.com/AzureCosmosDB/cosmosdb-claude-code-plugin"
+    },
+    {
+      "name": "box",
+      "description": "Work with your Box content directly from Claude Code — search files, organize folders, collaborate with your team, and use Box AI to answer questions, summarize documents, and extract data without leaving your workflow.",
+      "category": "productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/box/box-for-ai.git",
+        "sha": "6f4ec3549f3e869b115628403555b1c9220b2b34"
+      },
+      "homepage": "https://github.com/box/box-for-ai"
+    },
+    {
       "name": "brightdata-plugin",
       "description": "Web scraping, Google search, structured data extraction, and MCP server integration powered by Bright Data. Includes 7 skills: scrape any webpage as markdown (with bot detection/CAPTCHA bypass), search Google with structured JSON results, extract data from 40+ websites (Amazon, LinkedIn, Instagram, TikTok, YouTube, and more), orchestrate Bright Data's 60+ MCP tools, built-in best practices for Web Unlocker, SERP API, Web Scraper API, and Browser API, Python SDK best practices for the brightda...",
       "source": {
@@ -156,6 +189,17 @@
         "sha": "e671da495f7ec0ed6be5e9fa71e260f886a1dc36"
       },
       "homepage": "https://docs.brightdata.com"
+    },
+    {
+      "name": "cds-mcp",
+      "description": "AI-assisted development of SAP Cloud Application Programming Model (CAP) projects. Search CDS models and CAP documentation.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/cap-js/mcp-server.git",
+        "sha": "4d59d7070a52761a9b8028cbe710c8d7477cbc92"
+      },
+      "homepage": "https://cap.cloud.sap/"
     },
     {
       "name": "chrome-devtools-mcp",
@@ -232,6 +276,17 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management"
     },
     {
+      "name": "cloudflare",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/cloudflare/skills.git",
+        "sha": "5ec03da67e230df52b698255c8e5979dc9b124b6"
+      },
+      "description": "Skills for the Cloudflare developer platform: Workers, Durable Objects, Agents SDK, MCP servers, Wrangler CLI, and web performance.",
+      "category": "deployment",
+      "homepage": "https://github.com/cloudflare/skills"
+    },
+    {
       "name": "cloudinary",
       "description": "Use Cloudinary directly in Claude. Manage assets, apply transformations, optimize media, and more through natural conversation.",
       "source": {
@@ -243,7 +298,7 @@
     },
     {
       "name": "cockroachdb",
-      "description": "CockroachDB plugin for Claude Code \u2014 explore schemas, write optimized SQL, debug queries, and manage distributed database clusters directly from your AI coding agent.",
+      "description": "CockroachDB plugin for Claude Code — explore schemas, write optimized SQL, debug queries, and manage distributed database clusters directly from your AI coding agent.",
       "source": {
         "source": "url",
         "url": "https://github.com/cockroachdb/claude-plugin.git",
@@ -275,7 +330,7 @@
     },
     {
       "name": "coderabbit",
-      "description": "Your code review partner. CodeRabbit provides external validation using a specialized AI architecture and 40+ integrated static analyzers\u2014offering a different perspective that catches bugs, security vulnerabilities, logic errors, and edge cases. Context-aware analysis via AST parsing and codegraph relationships. Automatically incorporates CLAUDE.md and project coding guidelines into reviews. Useful after writing or modifying code, before commits, when implementing complex or security-sensitive logic, or when a second opinion would increase confidence in the changes. Returns specific findings with suggested fixes that can be applied immediately. Free to use.",
+      "description": "Your code review partner. CodeRabbit provides external validation using a specialized AI architecture and 40+ integrated static analyzers—offering a different perspective that catches bugs, security vulnerabilities, logic errors, and edge cases. Context-aware analysis via AST parsing and codegraph relationships. Automatically incorporates CLAUDE.md and project coding guidelines into reviews. Useful after writing or modifying code, before commits, when implementing complex or security-sensitive logic, or when a second opinion would increase confidence in the changes. Returns specific findings with suggested fixes that can be applied immediately. Free to use.",
       "category": "productivity",
       "source": {
         "source": "url",
@@ -365,7 +420,7 @@
     },
     {
       "name": "elixir-ls-lsp",
-      "description": "Elixir language server (ElixirLS) for Claude Code \u2014 provides code intelligence and diagnostics for .ex, .exs, and .heex files.",
+      "description": "Elixir language server (ElixirLS) for Claude Code — provides code intelligence and diagnostics for .ex, .exs, and .heex files.",
       "source": {
         "source": "url",
         "url": "https://github.com/MikaelFangel/claude-elixir-ls-lsp.git",
@@ -383,6 +438,18 @@
       "source": "./plugins/explanatory-output-style",
       "category": "learning",
       "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/explanatory-output-style"
+    },
+    {
+      "name": "expo",
+      "description": "Official Expo skills for building, deploying, upgrading, and debugging React Native apps with Expo. Covers UI development with Expo Router, SwiftUI and Jetpack Compose components, Tailwind CSS setup, API routes, data fetching, CI/CD workflows, App Store and Play Store deployment, SDK upgrades, DOM components, and dev client distribution.",
+      "category": "development",
+      "source": {
+        "source": "git-subdir",
+        "url": "expo/skills",
+        "path": "plugins/expo",
+        "ref": "main"
+      },
+      "homepage": "https://github.com/expo/skills/blob/main/plugins/expo/README.md"
     },
     {
       "name": "fakechat",
@@ -542,7 +609,7 @@
     },
     {
       "name": "helius",
-      "description": "Build on Solana with Helius \u2014 live blockchain tools, expert coding patterns, and autonomous account signup",
+      "description": "Build on Solana with Helius — live blockchain tools, expert coding patterns, and autonomous account signup",
       "source": {
         "source": "git-subdir",
         "url": "helius-labs/core-ai",
@@ -775,7 +842,7 @@
     },
     {
       "name": "netlify-skills",
-      "description": "Netlify platform skills for Claude Code \u2014 functions, edge functions, blobs, database, image CDN, forms, config, CLI, frameworks, caching, AI gateway, and deployment.",
+      "description": "Netlify platform skills for Claude Code — functions, edge functions, blobs, database, image CDN, forms, config, CLI, frameworks, caching, AI gateway, and deployment.",
       "category": "development",
       "source": {
         "source": "url",
@@ -795,7 +862,7 @@
     },
     {
       "name": "nimble",
-      "description": "Nimble web data toolkit \u2014 search, extract, map, crawl the web and work with structured data agents",
+      "description": "Nimble web data toolkit — search, extract, map, crawl the web and work with structured data agents",
       "source": {
         "source": "url",
         "url": "https://github.com/Nimbleway/agent-skills.git",
@@ -815,7 +882,7 @@
     },
     {
       "name": "opsera-devsecops",
-      "description": "Opsera DevSecOps Agent \u2014 AI-powered architecture analysis, security scanning, compliance auditing, and SQL security for your codebase. Free trial included.",
+      "description": "Opsera DevSecOps Agent — AI-powered architecture analysis, security scanning, compliance auditing, and SQL security for your codebase. Free trial included.",
       "source": {
         "source": "url",
         "url": "https://github.com/opsera-agents/opsera-devsecops.git",
@@ -825,7 +892,7 @@
     },
     {
       "name": "optibot",
-      "description": "AI code review that catches production-breaking bugs, business logic issues, and security vulnerabilities \u2014 directly in Claude Code.",
+      "description": "AI code review that catches production-breaking bugs, business logic issues, and security vulnerabilities — directly in Claude Code.",
       "source": {
         "source": "url",
         "url": "https://github.com/Optimal-AI/optibot-skill.git",
@@ -890,7 +957,7 @@
     },
     {
       "name": "playground",
-      "description": "Creates interactive HTML playgrounds \u2014 self-contained single-file explorers with visual controls, live preview, and prompt output with copy button. Includes templates for design playgrounds, data explorers, concept maps, and document critique.",
+      "description": "Creates interactive HTML playgrounds — self-contained single-file explorers with visual controls, live preview, and prompt output with copy button. Includes templates for design playgrounds, data explorers, concept maps, and document critique.",
       "author": {
         "name": "Anthropic",
         "email": "support@anthropic.com"
@@ -971,13 +1038,25 @@
     },
     {
       "name": "product-tracking-skills",
-      "description": "AI agent skills that make SaaS products data-ready for product analytics \u2014 from codebase scan to tracking plan to working instrumentation code.",
+      "description": "AI agent skills that make SaaS products data-ready for product analytics — from codebase scan to tracking plan to working instrumentation code.",
       "source": {
         "source": "url",
         "url": "https://github.com/Accoil/product-tracking-skills.git",
         "sha": "341f8cf47d8b5dda550222152377c50aee34c723"
       },
       "homepage": "https://www.accoil.com/product-tracking"
+    },
+    {
+      "name": "pydantic-ai",
+      "description": "Write accurate Pydantic AI code from the start. Up-to-date patterns, decision trees, and common gotchas for agents, tools, structured output, streaming, and multi-agent apps.",
+      "category": "development",
+      "source": {
+        "source": "git-subdir",
+        "url": "pydantic/skills",
+        "path": "plugins/ai",
+        "ref": "main"
+      },
+      "homepage": "https://github.com/pydantic/skills/tree/main/plugins/ai"
     },
     {
       "name": "pyright-lsp",
@@ -1005,7 +1084,7 @@
     },
     {
       "name": "qodo-skills",
-      "description": "Qodo Skills provides a curated library of reusable AI agent capabilities that extend Claude's functionality for software development workflows. Each skill is designed to integrate seamlessly into your development process, enabling tasks like code quality checks, automated testing, security scanning, and compliance validation. Skills operate across your entire SDLC\u2014from IDE to CI/CD\u2014ensuring consistent standards and catching issues early.",
+      "description": "Qodo Skills provides a curated library of reusable AI agent capabilities that extend Claude's functionality for software development workflows. Each skill is designed to integrate seamlessly into your development process, enabling tasks like code quality checks, automated testing, security scanning, and compliance validation. Skills operate across your entire SDLC—from IDE to CI/CD—ensuring consistent standards and catching issues early.",
       "category": "development",
       "source": {
         "source": "url",
@@ -1114,7 +1193,7 @@
       }
     },
     {
-      "name": "sanity-plugin",
+      "name": "sanity",
       "description": "Sanity content platform integration with MCP server, agent skills, and slash commands. Query and author content, build and optimize GROQ queries, design schemas, and set up Visual Editing.",
       "category": "development",
       "author": {
@@ -1129,7 +1208,7 @@
     },
     {
       "name": "searchfit-seo",
-      "description": "Free AI-powered SEO toolkit \u2014 audit websites, plan content strategy, optimize pages, generate schema markup, cluster keywords, and track AI visibility. Works with any website or codebase.",
+      "description": "Free AI-powered SEO toolkit — audit websites, plan content strategy, optimize pages, generate schema markup, cluster keywords, and track AI visibility. Works with any website or codebase.",
       "source": {
         "source": "url",
         "url": "https://github.com/searchfit/searchfit-seo.git",
@@ -1180,6 +1259,17 @@
       ]
     },
     {
+      "name": "session-report",
+      "description": "Generate an explorable HTML report of Claude Code session usage — tokens, cache efficiency, subagents, skills, and the most expensive prompts — from local ~/.claude/projects transcripts.",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/session-report",
+      "category": "productivity",
+      "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/session-report"
+    },
+    {
       "name": "skill-creator",
       "description": "Create new skills, improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, update or optimize an existing skill, run evals to test a skill, or benchmark skill performance with variance analysis.",
       "author": {
@@ -1201,6 +1291,16 @@
       "homepage": "https://github.com/slackapi/slack-mcp-plugin/tree/main"
     },
     {
+      "name": "sonarqube-agent-plugins",
+      "description": "Integrate SonarQube code quality and security analysis into Claude Code: namespaced slash commands, a guided skill to setup the SonarQube CLI, and a startup check for CLI wiring. MCP server registration and secrets-scanning hooks are installed by the SonarQube CLI as part of setup.",
+      "category": "security",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/SonarSource/sonarqube-agent-plugins.git"
+      },
+      "homepage": "https://github.com/SonarSource/sonarqube-agent-plugins"
+    },
+    {
       "name": "sonatype-guide",
       "description": "Sonatype Guide MCP server for software supply chain intelligence and dependency security. Analyze dependencies for vulnerabilities, get secure version recommendations, and check component quality metrics.",
       "category": "security",
@@ -1220,6 +1320,17 @@
         "sha": "cfe3d44476957b16d1575261bef6b2dc7cb1e0b7"
       },
       "homepage": "https://sourcegraph.com"
+    },
+    {
+      "name": "spotify-ads-api",
+      "description": "Manage Spotify ad campaigns with natural language. Create campaigns, ad sets, ads, pull reports, and handle OAuth — all through conversation.",
+      "category": "productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/spotify/ads-claude-plugin.git",
+        "sha": "a4bce9912db071d47dfb410086a48004e0539efa"
+      },
+      "homepage": "https://github.com/spotify/ads-claude-plugin"
     },
     {
       "name": "stagehand",
@@ -1433,15 +1544,14 @@
       "homepage": "https://github.com/zapier/zapier-mcp/tree/main/plugins/zapier"
     },
     {
-      "name": "zoominfo",
-      "description": "Search companies and contacts, enrich leads, find lookalikes, and get AI-ranked contact recommendations. Pre-built skills chain multiple ZoomInfo tools into complete B2B sales workflows.",
-      "category": "productivity",
+      "name": "zoom-plugin",
+      "description": "Claude plugin for planning, building, and debugging Zoom integrations across REST APIs, SDKs, webhooks, bots, and MCP workflows.",
+      "category": "development",
       "source": {
         "source": "url",
-        "url": "https://github.com/Zoominfo/zoominfo-mcp-plugin.git",
-        "sha": "0705316ef8a2d0c64f81e50d4612ccc6a74edf03"
+        "url": "https://github.com/zoom/zoom-plugin.git"
       },
-      "homepage": "https://zoominfo.com"
+      "homepage": "https://developers.zoom.us/"
     }
   ]
 }

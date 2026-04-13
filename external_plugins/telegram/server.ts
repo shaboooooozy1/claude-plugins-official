@@ -51,6 +51,22 @@ if (!TOKEN) {
   process.exit(1)
 }
 const INBOX_DIR = join(STATE_DIR, 'inbox')
+const PID_FILE = join(STATE_DIR, 'bot.pid')
+
+// Telegram allows exactly one getUpdates consumer per token. If a previous
+// session crashed (SIGKILL, terminal closed) its server.ts grandchild can
+// survive as an orphan and hold the slot forever, so every new session sees
+// 409 Conflict. Kill any stale holder before we start polling.
+mkdirSync(STATE_DIR, { recursive: true, mode: 0o700 })
+try {
+  const stale = parseInt(readFileSync(PID_FILE, 'utf8'), 10)
+  if (stale > 1 && stale !== process.pid) {
+    process.kill(stale, 0)
+    process.stderr.write(`telegram channel: replacing stale poller pid=${stale}\n`)
+    process.kill(stale, 'SIGTERM')
+  }
+} catch {}
+writeFileSync(PID_FILE, String(process.pid))
 
 // Last-resort safety net — without these the process dies silently on any
 // unhandled promise rejection. With them it logs and keeps serving tools.
@@ -621,6 +637,9 @@ function shutdown(): void {
   if (shuttingDown) return
   shuttingDown = true
   process.stderr.write('telegram channel: shutting down\n')
+  try {
+    if (parseInt(readFileSync(PID_FILE, 'utf8'), 10) === process.pid) rmSync(PID_FILE)
+  } catch {}
   // bot.stop() signals the poll loop to end; the current getUpdates request
   // may take up to its long-poll timeout to return. Force-exit after 2s.
   setTimeout(() => process.exit(0), 2000)
@@ -630,6 +649,19 @@ process.stdin.on('end', shutdown)
 process.stdin.on('close', shutdown)
 process.on('SIGTERM', shutdown)
 process.on('SIGINT', shutdown)
+process.on('SIGHUP', shutdown)
+
+// Orphan watchdog: stdin events above don't reliably fire when the parent
+// chain (`bun run` wrapper → shell → us) is severed by a crash. Poll for
+// reparenting (POSIX) or a dead stdin pipe and self-terminate.
+const bootPpid = process.ppid
+setInterval(() => {
+  const orphaned =
+    (process.platform !== 'win32' && process.ppid !== bootPpid) ||
+    process.stdin.destroyed ||
+    process.stdin.readableEnded
+  if (orphaned) shutdown()
+}, 5000).unref()
 
 // Commands are DM-only. Responding in groups would: (1) leak pairing codes via
 // /status to other group members, (2) confirm bot presence in non-allowlisted
@@ -975,7 +1007,15 @@ void (async () => {
       })
       return // bot.stop() was called — clean exit from the loop
     } catch (err) {
+      if (shuttingDown) return
       if (err instanceof GrammyError && err.error_code === 409) {
+        if (attempt >= 8) {
+          process.stderr.write(
+            `telegram channel: 409 Conflict persists after ${attempt} attempts — ` +
+            `another poller is holding the bot token (stray 'bun server.ts' process or a second session). Exiting.\n`,
+          )
+          return
+        }
         const delay = Math.min(1000 * attempt, 15000)
         const detail = attempt === 1
           ? ' — another instance is polling (zombie session, or a second Claude Code running?)'
