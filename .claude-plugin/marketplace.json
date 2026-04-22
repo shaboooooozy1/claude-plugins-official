@@ -248,6 +248,17 @@
       "homepage": "https://cap.cloud.sap/"
     },
     {
+      "name": "changelog-keeper",
+      "description": "Create and maintain CHANGELOG.md files following the Keep a Changelog convention with slash commands for initializing, adding entries, and cutting releases",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/changelog-keeper",
+      "category": "productivity",
+      "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/changelog-keeper"
+    },
+    {
       "name": "chrome-devtools-mcp",
       "description": "Control and inspect a live Chrome browser from your coding agent. Record performance traces, analyze network requests, check console messages with source-mapped stack traces, and automate browser actions with Puppeteer.",
       "category": "development",
