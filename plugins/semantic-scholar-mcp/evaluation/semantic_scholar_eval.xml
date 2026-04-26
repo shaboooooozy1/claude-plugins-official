@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evaluation>
+  <qa_pair>
+    <question>Resolve DOI "10.1038/nature14539" to its Semantic Scholar paperId (CorpusId).</question>
+    <answer>209420551</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>How many authors are listed on "Attention Is All You Need" (2017)?</question>
+    <answer>8</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>What year was "Deep Residual Learning for Image Recognition" published?</question>
+    <answer>2015</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>What is Yoshua Bengio's Semantic Scholar authorId?</question>
+    <answer>1780531</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>First author surname of ARXIV:1512.03385?</question>
+    <answer>He</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Publication year of "ImageNet Classification with Deep Convolutional Neural Networks"?</question>
+    <answer>2012</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>referenceCount of DOI 10.1038/nature14539?</question>
+    <answer>100</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>What format are Semantic Scholar dataset release IDs?</question>
+    <answer>YYYY-MM-DD</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Semantic Scholar paperId for PMID:20813121?</question>
+    <answer>7954013</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Venue of "Generative Adversarial Nets" (Goodfellow et al., 2014)?</question>
+    <answer>Neural Information Processing Systems</answer>
+  </qa_pair>
+</evaluation>
