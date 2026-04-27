@@ -110,7 +110,7 @@ External plugins are not submitted via PRs. Direct contributors to the [plugin d
   "description": "Short description shown in the marketplace",
   "category": "development",
   "source": {
-    "source": "url",
+    "source": "url",          // source type: "url", "git-subdir", or a local path string
     "url": "https://github.com/org/repo.git",
     "sha": "<optional-pinned-commit-sha>"
   },
@@ -119,3 +119,5 @@ External plugins are not submitted via PRs. Direct contributors to the [plugin d
 ```
 
 Required fields: `name`, `description`, `source`. Optional: `category`, `homepage`, `sha` pin inside `source`.
+
+The `source` field accepts either an object (with a nested `source` field indicating the type: `"url"` or `"git-subdir"`) or a local path string (e.g. `"./plugins/my-plugin"` for internal plugins).
