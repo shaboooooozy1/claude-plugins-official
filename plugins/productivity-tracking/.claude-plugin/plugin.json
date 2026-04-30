@@ -1,0 +1,10 @@
+{
+  "name": "productivity-tracking",
+  "version": "1.0.0",
+  "description": "Track productivity sessions with Claude Code — set goals, log completed tasks, and get time-on-task summaries",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  },
+  "keywords": ["productivity", "tracking", "goals", "session", "time"]
+}

@@ -1,0 +1,16 @@
+{
+  "description": "Productivity tracking — increment turn counter on each Claude stop event",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session-tracker.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
