@@ -42,6 +42,13 @@ function quoteSpecialValues(text: string): string {
         result.push(line);
         continue;
       }
+      // Skip block scalar indicators (| and >) — quoting them would turn
+      // the multi-line block scalar into a literal "|" or ">" string and
+      // break parsing of the indented content that follows.
+      if (/^[|>][-+]?[0-9]*$/.test(value)) {
+        result.push(line);
+        continue;
+      }
       if (YAML_SPECIAL_CHARS.test(value)) {
         const escaped = value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
         result.push(`${key}: "${escaped}"`);
