@@ -477,6 +477,17 @@
       "homepage": "https://elixir-lsp.github.io/elixir-ls/"
     },
     {
+      "name": "example-plugin",
+      "description": "Comprehensive example plugin demonstrating all Claude Code extension options including commands, agents, skills, hooks, and MCP servers",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/example-plugin",
+      "category": "development",
+      "homepage": "https://github.com/shaboooooozy1/claude-plugins-official/tree/main/plugins/example-plugin"
+    },
+    {
       "name": "explanatory-output-style",
       "description": "Adds educational insights about implementation choices and codebase patterns (mimics the deprecated Explanatory output style)",
       "author": {
@@ -1094,6 +1105,17 @@
       "homepage": "https://www.accoil.com/product-tracking"
     },
     {
+      "name": "productivity-tracking",
+      "description": "Track productivity sessions with Claude Code — set goals, log completed tasks, and get time-on-task summaries",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/productivity-tracking",
+      "category": "productivity",
+      "homepage": "https://github.com/shaboooooozy1/claude-plugins-official/tree/main/plugins/productivity-tracking"
+    },
+    {
       "name": "pydantic-ai",
       "description": "Write accurate Pydantic AI code from the start. Up-to-date patterns, decision trees, and common gotchas for agents, tools, structured output, streaming, and multi-agent apps.",
       "category": "development",
@@ -1272,7 +1294,7 @@
       },
       "source": "./plugins/security-guidance",
       "category": "security",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/security-guidance"
+      "homepage": "https://github.com/shaboooooozy1/claude-plugins-official/tree/main/plugins/security-guidance"
     },
     {
       "name": "semgrep",
