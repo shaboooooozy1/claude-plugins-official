@@ -42,6 +42,11 @@ function quoteSpecialValues(text: string): string {
         result.push(line);
         continue;
       }
+      // Skip YAML block scalar indicators (|, >, with optional chomping/indent)
+      if (/^[|>][-+]?\d*$/.test(value.trim())) {
+        result.push(line);
+        continue;
+      }
       if (YAML_SPECIAL_CHARS.test(value)) {
         const escaped = value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
         result.push(`${key}: "${escaped}"`);
