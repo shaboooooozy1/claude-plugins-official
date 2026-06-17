@@ -19,20 +19,23 @@ claude-plugins-official/
 
 ### Internal Plugins (`/plugins`)
 
-32 plugins organized into categories:
+35 plugins organized into categories:
 
-- **Development tools**: `agent-sdk-dev`, `claude-code-setup`, `claude-md-management`, `code-review`, `code-simplifier`, `commit-commands`, `feature-dev`, `frontend-design`, `hookify`, `mcp-server-dev`, `playground`, `plugin-dev`, `pr-review-toolkit`, `security-guidance`, `skill-creator`
+- **Development tools** (15): `agent-sdk-dev`, `claude-code-setup`, `claude-md-management`, `code-review`, `code-simplifier`, `commit-commands`, `feature-dev`, `frontend-design`, `hookify`, `mcp-server-dev`, `playground`, `plugin-dev`, `pr-review-toolkit`, `security-guidance`, `skill-creator`
 - **LSP plugins** (12): `clangd-lsp`, `csharp-lsp`, `gopls-lsp`, `jdtls-lsp`, `kotlin-lsp`, `lua-lsp`, `php-lsp`, `pyright-lsp`, `ruby-lsp`, `rust-analyzer-lsp`, `swift-lsp`, `typescript-lsp`
-- **Output styles**: `explanatory-output-style`, `learning-output-style`
-- **Specialized**: `example-plugin`, `math-olympiad`, `ralph-loop`
+- **Output styles** (2): `explanatory-output-style`, `learning-output-style`
+- **Productivity & reporting** (3): `productivity-tracking`, `session-report`, `super-app`
+- **Specialized** (3): `example-plugin`, `math-olympiad`, `ralph-loop`
 
 ### External Plugins (`/external_plugins`)
 
-17 third-party plugins: `asana`, `context7`, `discord`, `fakechat`, `firebase`, `github`, `gitlab`, `greptile`, `imessage`, `laravel-boost`, `linear`, `playwright`, `serena`, `slack`, `supabase`, `telegram`, `terraform`
+16 third-party plugins live as local directories: `asana`, `context7`, `discord`, `fakechat`, `firebase`, `github`, `gitlab`, `greptile`, `imessage`, `laravel-boost`, `linear`, `playwright`, `serena`, `supabase`, `telegram`, `terraform`.
+
+Note: `slack` is still listed in the marketplace but is now an externally-hosted entry (it no longer has a local directory under `/external_plugins`).
 
 ### Reference Plugins
 
-- **`plugins/example-plugin`** — Minimal reference implementation demonstrating all plugin features (not registered in `marketplace.json`)
+- **`plugins/example-plugin`** — Minimal reference implementation demonstrating all plugin features. It is registered in `marketplace.json` and ships an `.mcp.json` as a worked example.
 - **`plugins/plugin-dev`** — Comprehensive plugin development toolkit with 7 skills (`agent-development`, `command-development`, `hook-development`, `mcp-integration`, `plugin-settings`, `plugin-structure`, `skill-development`)
 
 ## Plugin Structure
@@ -152,20 +155,20 @@ Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `Session
 
 ### Plugins with Agents
 
-6 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`.
+7 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`, `super-app`.
 
 ### Plugins with Hooks
 
-5 plugins use the hook system: `explanatory-output-style`, `hookify`, `learning-output-style`, `ralph-loop`, `security-guidance`.
+6 plugins use the hook system: `explanatory-output-style`, `hookify`, `learning-output-style`, `productivity-tracking`, `ralph-loop`, `security-guidance`.
 
 ## Marketplace Configuration
 
-`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **123 registered plugins**:
+`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **142 registered plugins**:
 
-- **48 local entries** pointing to directories in this repo (31 in `/plugins`, 17 in `/external_plugins`)
-- **75 externally-hosted entries** (60 `url`, 14 `git-subdir`, 1 `github`)
+- **51 local entries** pointing to directories in this repo (35 in `/plugins`, 16 in `/external_plugins`)
+- **91 externally-hosted entries** (72 `url`, 18 `git-subdir`, 1 `github`)
 
-Note: `plugins/example-plugin` exists as a reference implementation and is intentionally **not** registered in `marketplace.json`.
+All 35 `/plugins` directories — including `example-plugin` — are registered.
 
 Entries must be:
 - **Alphabetically sorted** by `name` (case-insensitive)
@@ -200,7 +203,7 @@ Validation rules:
 - **Skills**: Must have `description` or `when_to_use`
 - **Commands**: Must have `description` (string)
 
-YAML special characters (`* & # ! | > % @ {} []`) must be quoted in frontmatter values.
+YAML special characters (`* & # ! | > % @ {} []`) must be quoted in frontmatter values. Block scalar indicators (`|`, `>`) are supported for multi-line values.
 
 Run locally:
 ```bash
