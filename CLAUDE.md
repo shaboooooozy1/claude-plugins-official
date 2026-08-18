@@ -19,16 +19,17 @@ claude-plugins-official/
 
 ### Internal Plugins (`/plugins`)
 
-32 plugins organized into categories:
+35 plugins organized into categories:
 
 - **Development tools**: `agent-sdk-dev`, `claude-code-setup`, `claude-md-management`, `code-review`, `code-simplifier`, `commit-commands`, `feature-dev`, `frontend-design`, `hookify`, `mcp-server-dev`, `playground`, `plugin-dev`, `pr-review-toolkit`, `security-guidance`, `skill-creator`
 - **LSP plugins** (12): `clangd-lsp`, `csharp-lsp`, `gopls-lsp`, `jdtls-lsp`, `kotlin-lsp`, `lua-lsp`, `php-lsp`, `pyright-lsp`, `ruby-lsp`, `rust-analyzer-lsp`, `swift-lsp`, `typescript-lsp`
 - **Output styles**: `explanatory-output-style`, `learning-output-style`
+- **Productivity**: `productivity-tracking`, `session-report`, `super-app`
 - **Specialized**: `example-plugin`, `math-olympiad`, `ralph-loop`
 
 ### External Plugins (`/external_plugins`)
 
-17 third-party plugins: `asana`, `context7`, `discord`, `fakechat`, `firebase`, `github`, `gitlab`, `greptile`, `imessage`, `laravel-boost`, `linear`, `playwright`, `serena`, `slack`, `supabase`, `telegram`, `terraform`
+16 third-party plugins: `asana`, `context7`, `discord`, `fakechat`, `firebase`, `github`, `gitlab`, `greptile`, `imessage`, `laravel-boost`, `linear`, `playwright`, `serena`, `supabase`, `telegram`, `terraform`
 
 ### Reference Plugins
 
@@ -152,18 +153,18 @@ Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `Session
 
 ### Plugins with Agents
 
-6 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`.
+7 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`, `super-app`.
 
 ### Plugins with Hooks
 
-5 plugins use the hook system: `explanatory-output-style`, `hookify`, `learning-output-style`, `ralph-loop`, `security-guidance`.
+6 plugins use the hook system: `explanatory-output-style`, `hookify`, `learning-output-style`, `productivity-tracking`, `ralph-loop`, `security-guidance`.
 
 ## Marketplace Configuration
 
-`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **123 registered plugins**:
+`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **142 registered plugins**:
 
-- **48 local entries** pointing to directories in this repo (31 in `/plugins`, 17 in `/external_plugins`)
-- **75 externally-hosted entries** (60 `url`, 14 `git-subdir`, 1 `github`)
+- **51 local entries** pointing to directories in this repo (35 in `/plugins`, 16 in `/external_plugins`)
+- **91 externally-hosted entries** (72 `url`, 18 `git-subdir`, 1 `github`)
 
 Note: `plugins/example-plugin` exists as a reference implementation and is intentionally **not** registered in `marketplace.json`.
 
