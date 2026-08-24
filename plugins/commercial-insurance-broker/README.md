@@ -35,10 +35,10 @@ draft a COI with additional insured wording
 Or invoke a specific workflow:
 
 ```text
-/broker-workflow intake
-/broker-workflow quotes
-/broker-workflow policy-check
-/broker-workflow coi
+/commercial-insurance-broker:broker-workflow intake
+/commercial-insurance-broker:broker-workflow quotes
+/commercial-insurance-broker:broker-workflow policy-check
+/commercial-insurance-broker:broker-workflow coi
 ```
 
 Supported workflow names: `intake`, `submission`, `quotes`, `bind`,
