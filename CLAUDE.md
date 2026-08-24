@@ -19,12 +19,12 @@ claude-plugins-official/
 
 ### Internal Plugins (`/plugins`)
 
-35 plugins organized into categories:
+36 plugins organized into categories:
 
 - **Development tools**: `agent-sdk-dev`, `claude-code-setup`, `claude-md-management`, `code-review`, `code-simplifier`, `commit-commands`, `feature-dev`, `frontend-design`, `hookify`, `mcp-server-dev`, `playground`, `plugin-dev`, `pr-review-toolkit`, `security-guidance`, `skill-creator`
 - **LSP plugins** (12): `clangd-lsp`, `csharp-lsp`, `gopls-lsp`, `jdtls-lsp`, `kotlin-lsp`, `lua-lsp`, `php-lsp`, `pyright-lsp`, `ruby-lsp`, `rust-analyzer-lsp`, `swift-lsp`, `typescript-lsp`
 - **Output styles**: `explanatory-output-style`, `learning-output-style`
-- **Productivity & reporting**: `productivity-tracking` (goal/task session tracking via hooks), `session-report` (HTML usage report from local transcripts), `super-app` (unified search, fact-checking, research, and productivity integrations)
+- **Productivity & reporting**: `personalize` (per-project working preferences), `productivity-tracking` (goal/task session tracking via hooks), `session-report` (HTML usage report from local transcripts), `super-app` (unified search, fact-checking, research, and productivity integrations)
 - **Specialized**: `example-plugin`, `math-olympiad`, `ralph-loop`
 
 ### External Plugins (`/external_plugins`)
