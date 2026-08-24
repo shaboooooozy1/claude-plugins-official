@@ -375,6 +375,18 @@
       "homepage": "https://github.com/coderabbitai/claude-plugin.git"
     },
     {
+      "name": "commercial-insurance-broker",
+      "description": "Guided commercial P&C insurance broker workflows: new-business intake, market submissions, quote comparison, binding, policy checking, certificates, endorsements, renewals, and claims.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/commercial-insurance-broker",
+      "category": "productivity",
+      "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/commercial-insurance-broker"
+    },
+    {
       "name": "commit-commands",
       "description": "Commands for git commit workflows including commit, push, and PR creation",
       "author": {
