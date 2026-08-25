@@ -8,6 +8,11 @@ if [[ ! -f "$PROFILE_FILE" ]]; then
   exit 0
 fi
 
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "personalize: python3 is required to load $PROFILE_FILE" >&2
+  exit 0
+fi
+
 python3 - "$PROFILE_FILE" <<'PY'
 import json
 import re
@@ -42,8 +47,7 @@ print(
                 "hookEventName": "SessionStart",
                 "additionalContext": context,
             }
-        },
-        ensure_ascii=False,
+        }
     )
 )
 PY

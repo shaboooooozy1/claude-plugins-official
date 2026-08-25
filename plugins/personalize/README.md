@@ -5,14 +5,16 @@ in every Claude Code session.
 
 ## What It Does
 
-- `/personalize` interviews the user about language, tone, verbosity, stack,
-  testing, commit style, and custom rules.
-- `/personalize-show` displays the active profile.
+- `/personalize:personalize` interviews the user about language, tone,
+  verbosity, stack, testing, commit style, and custom rules.
+- `/personalize:personalize-show` displays the active profile.
 - A `SessionStart` hook adds the profile to Claude's context.
 
 Preferences are stored in `.claude/personalize.local.md` in the current
 project. The file is user-managed and intended to stay local rather than be
 committed.
+
+Requires `python3` on `PATH` for profile injection at session start.
 
 ## Usage
 
@@ -25,13 +27,13 @@ Install the plugin:
 Create or update a profile:
 
 ```text
-/personalize
+/personalize:personalize
 ```
 
 Inspect the current profile:
 
 ```text
-/personalize-show
+/personalize:personalize-show
 ```
 
 To temporarily disable personalization, set `enabled: false` in the profile's

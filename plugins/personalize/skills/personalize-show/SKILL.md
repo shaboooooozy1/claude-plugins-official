@@ -17,6 +17,6 @@ Inspect `.claude/personalize.local.md` in the current project.
 5. Identify malformed or unsupported fields and point to
    `${CLAUDE_PLUGIN_ROOT}/references/profile-schema.md`.
 6. When the file does not exist, explain that no profile is configured and
-   suggest running `/personalize`.
+   suggest running `/personalize:personalize`.
 
 Do not modify the profile.

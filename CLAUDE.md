@@ -19,13 +19,13 @@ claude-plugins-official/
 
 ### Internal Plugins (`/plugins`)
 
-36 plugins organized into categories:
+37 plugins organized into categories:
 
 - **Development tools**: `agent-sdk-dev`, `claude-code-setup`, `claude-md-management`, `code-review`, `code-simplifier`, `commit-commands`, `feature-dev`, `frontend-design`, `hookify`, `mcp-server-dev`, `playground`, `plugin-dev`, `pr-review-toolkit`, `security-guidance`, `skill-creator`
 - **LSP plugins** (12): `clangd-lsp`, `csharp-lsp`, `gopls-lsp`, `jdtls-lsp`, `kotlin-lsp`, `lua-lsp`, `php-lsp`, `pyright-lsp`, `ruby-lsp`, `rust-analyzer-lsp`, `swift-lsp`, `typescript-lsp`
 - **Output styles**: `explanatory-output-style`, `learning-output-style`
 - **Productivity & reporting**: `personalize` (per-project working preferences), `productivity-tracking` (goal/task session tracking via hooks), `session-report` (HTML usage report from local transcripts), `super-app` (unified search, fact-checking, research, and productivity integrations)
-- **Specialized**: `example-plugin`, `math-olympiad`, `ralph-loop`
+- **Specialized**: `commercial-insurance-broker`, `example-plugin`, `math-olympiad`, `ralph-loop`
 
 ### External Plugins (`/external_plugins`)
 
@@ -159,16 +159,16 @@ Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `Session
 
 ### Plugins with Hooks
 
-6 plugins use the hook system: `explanatory-output-style`, `hookify`, `learning-output-style`, `productivity-tracking`, `ralph-loop`, `security-guidance`.
+7 plugins use the hook system: `explanatory-output-style`, `hookify`, `learning-output-style`, `personalize`, `productivity-tracking`, `ralph-loop`, `security-guidance`.
 
 ## Marketplace Configuration
 
-`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **143 registered plugins**:
+`.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **144 registered plugins**:
 
-- **52 local entries** pointing to directories in this repo (36 in `/plugins`, 16 in `/external_plugins`)
+- **53 local entries** pointing to directories in this repo (37 in `/plugins`, 16 in `/external_plugins`)
 - **91 externally-hosted entries** (72 `url`, 18 `git-subdir`, 1 `github`)
 
-Note: all 36 directories in `/plugins` are registered, including `plugins/example-plugin` (the reference implementation, under the `development` category).
+Note: all 37 directories in `/plugins` are registered, including `plugins/example-plugin` (the reference implementation, under the `development` category).
 
 Entries must be:
 - **Alphabetically sorted** by `name` (case-insensitive)
