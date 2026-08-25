@@ -1,2 +1,8 @@
 *.DS_Store
 .claude/
+
+# Transient dependency artifacts created when running the validation scripts
+# locally (CI installs `yaml` into .github/scripts on the fly).
+.github/scripts/node_modules/
+.github/scripts/package.json
+.github/scripts/bun.lock

@@ -212,13 +212,15 @@ bun .github/scripts/validate-frontmatter.ts <file1> [file2...]
 
 ### 2. Marketplace Validation (`validate-marketplace.yml`)
 
-Triggered on changes to `.claude-plugin/marketplace.json`.
+Triggered on changes to `.claude-plugin/marketplace.json`, `.github/scripts/*.ts`, and any plugin manifest under `plugins/` or `external_plugins/`.
 
 Checks:
 - Valid JSON with `plugins` array
 - Required fields: `name`, `description`, `source`
 - No duplicate plugin names
 - Alphabetical sort order
+- Every local `source` path resolves to a directory containing a valid `.claude-plugin/plugin.json` whose `name` matches the marketplace entry
+- Every directory under `plugins/` and `external_plugins/` is registered in the marketplace
 
 Run locally:
 ```bash

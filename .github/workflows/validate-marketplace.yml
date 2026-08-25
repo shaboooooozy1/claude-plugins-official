@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - '.claude-plugin/marketplace.json'
+      - '.github/scripts/*.ts'
+      - 'plugins/**/plugin.json'
+      - 'external_plugins/**/plugin.json'
 
 jobs:
   validate:
