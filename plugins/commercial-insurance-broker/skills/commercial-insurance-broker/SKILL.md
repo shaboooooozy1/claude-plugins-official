@@ -53,5 +53,7 @@ and COI requests.
 - Prefer carrier, wholesale, and AMS/CRM source documents over memory.
 - When comparing quotes, align limit, deductible, form edition, and exclusions
   on the same row.
-- For certificates, draft requested wording and list what the policy must
-  actually contain before the certificate is issued.
+- For certificates, draft requested wording only after verifying the policy
+  contains the forms that support it. When the policy does not support a
+  request, do not draft the wording; produce the endorsement request or
+  coverage-gap note instead.

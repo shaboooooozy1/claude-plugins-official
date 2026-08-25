@@ -112,10 +112,13 @@ Goal: retain, remarket, or restructure before expiration.
 
 Goal: notice the claim and preserve coverage.
 
-1. Capture date of loss, location, parties, injuries/property, and how the
-   producer learned of it.
-2. Identify policies that may respond, including expired occurrence and
-   current claims-made.
+1. Capture date of loss, date the claim was first made against the insured,
+   location, parties, injuries/property, and how the producer learned of it.
+2. Identify policies that may respond, including expired occurrence policies
+   and current and prior claims-made policies. For claims-made lines, check
+   the retroactive date of each policy and any extended reporting period, and
+   notice the policy in force when the claim was first made (or the ERP that
+   applies) rather than defaulting to the current policy.
 3. Draft FNOL content for the carrier and a client checklist (do not admit
    liability, preserve evidence, send contracts and incident reports).
 4. List coverage questions without deciding coverage: late notice, expected
