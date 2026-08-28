@@ -1,6 +1,6 @@
 ---
 name: commercial-insurance-broker
-description: "This skill should be used when the user asks to run commercial insurance broker work, new-business intake, market submissions, quote comparisons, bind checklists, policy checking, certificates of insurance, endorsements, renewals, FNOL, or claims for commercial P&C accounts."
+description: "This skill should be used when the user asks to run commercial insurance broker work, new-business intake, market submissions, quote comparisons, bind checklists, policy checking, certificates of insurance, contract insurance exhibits, endorsements, renewals, FNOL, claims, broker of record, premium audits, cancellations, or schedule/CSV exposure files for commercial P&C accounts."
 ---
 
 # Commercial Insurance Broker Workflows
@@ -19,6 +19,9 @@ Do not invent bound coverage, premiums, or form numbers.
 Load `${CLAUDE_PLUGIN_ROOT}/references/workflows.md` for the selected workflow.
 Load `${CLAUDE_PLUGIN_ROOT}/references/coverage-lines.md` when choosing lines.
 Load `${CLAUDE_PLUGIN_ROOT}/references/acord-and-data.md` for intake and submissions.
+Load `${CLAUDE_PLUGIN_ROOT}/references/contract-requirements.md` for insurance exhibits.
+Load `${CLAUDE_PLUGIN_ROOT}/references/schedules-and-exports.md` for CSV or AMS exports.
+Load `${CLAUDE_PLUGIN_ROOT}/references/artifact-templates.md` when drafting emails or memos.
 
 ## Route the request
 
@@ -26,13 +29,20 @@ Load `${CLAUDE_PLUGIN_ROOT}/references/acord-and-data.md` for intake and submiss
 |---|---|
 | new account, qualification, missing info | `intake` |
 | market list, submission package, underwriter email | `submission` |
-| quote comparison, proposal, coverage gaps | `quotes` |
+| quote comparison, coverage gaps | `quotes` |
+| client proposal or RFP response | `proposal` |
 | bind order, subjectivities, binder review | `bind` |
 | issued policy vs quote/binder | `policy-check` |
 | certificate, additional insured, waiver of subrogation | `coi` |
+| contract exhibit, insurance requirements | `contract-review` |
 | mid-term change, add location/vehicle/named insured | `endorsement` |
 | expiration, remarket, stewardship | `renewal` |
 | FNOL, claim notice, coverage investigation | `claims` |
+| loss history request or summary | `loss-runs` |
+| broker of record | `bor` |
+| premium audit, payroll audit | `audit` |
+| cancellation, non-renewal, rewrite | `cancellation` |
+| SOV, vehicle, driver, payroll, or claims CSV | `schedules` |
 
 If the workflow is unclear, ask one clarifying question, then proceed.
 
@@ -44,8 +54,8 @@ If the workflow is unclear, ask one clarifying question, then proceed.
 4. **Draft artifact** — email, checklist, comparison table, or memo.
 5. **Compliance notes** — surplus lines, subjectivities, form-to-verify items.
 
-Use tables for quote and policy comparisons. Use checklists for intake, bind,
-and COI requests.
+Use tables for quote, policy, contract, and schedule comparisons. Use
+checklists for intake, bind, audit, and COI requests.
 
 ## Artifact rules
 
@@ -55,3 +65,4 @@ and COI requests.
   on the same row.
 - For certificates, draft requested wording and list what the policy must
   actually contain before the certificate is issued.
+- For spreadsheets, classify the export and report data quality before marketing.
