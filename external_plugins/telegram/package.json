@@ -8,7 +8,7 @@
     "start": "bun install --no-summary && bun server.ts"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0",
-    "grammy": "^1.21.0"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "grammy": "^1.45.1"
   }
 }
