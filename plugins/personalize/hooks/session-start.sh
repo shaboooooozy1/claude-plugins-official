@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PROFILE_FILE="${CLAUDE_PROJECT_DIR}/.claude/personalize.local.md"
+PROFILE_FILE="${CLAUDE_PROJECT_DIR:-$PWD}/.claude/personalize.local.md"
 
 if [[ ! -f "$PROFILE_FILE" ]]; then
   exit 0
