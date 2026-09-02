@@ -120,3 +120,102 @@ Goal: notice the claim and preserve coverage.
    liability, preserve evidence, send contracts and incident reports).
 4. List coverage questions without deciding coverage: late notice, expected
    or intended, workers vs GL, additional insured status, and SIR obligations.
+
+## contract-review
+
+Goal: map a contract's insurance exhibit to the account's program.
+
+1. Extract required lines, limits, additional insured status, waiver,
+   primary/noncontributory, notice of cancellation, and any manuscript wording.
+2. Load `contract-requirements.md` and mark each ask as `supported`,
+   `endorsement-required`, `cannot-meet`, or `unverified`.
+3. Separate owner/GC asks that are standard from those that exceed typical
+   ISO additional-insured grants.
+4. Draft a client memo: what the current program can certificate today, what
+   must be endorsed before the job, and what to negotiate out of the contract.
+5. If a COI is also requested, continue into the `coi` checklist only for
+   wording the policy can support.
+
+## loss-runs
+
+Goal: request, inventory, and summarize loss history without inventing claims.
+
+1. Identify lines, policy periods, carriers, and whether currently valued
+   runs are on file.
+2. Draft carrier/TPA loss-run request letters with named insured, policy
+   numbers if stated, and valuation date needed.
+3. Inventory received runs: valuation date, claim count, paid, reserved,
+   recovered, and large-loss narratives.
+4. Flag stale valuations, missing years, open claims, and frequency vs
+   severity patterns as observations, not underwriting decisions.
+5. Feed gaps back into `submission` or `renewal` blocking lists.
+
+## bor
+
+Goal: execute a broker-of-record change without coverage interruption.
+
+1. Confirm incumbent agent/broker, carriers, expiration dates, and whether
+   the account is mid-term or at renewal.
+2. Draft BOR letter on agency letterhead fields: named insured, FEIN if
+   provided, lines, policy numbers if stated, and requested effective date.
+3. List carrier BOR rules that remain `unverified` (waiting periods, wet
+   ink, email domain, wholesaler consent).
+4. Build a document-collection plan so marketing does not wait on the BOR
+   to finish.
+5. Warn that a BOR does not bind coverage or cancel the incumbent until
+   the carrier accepts it.
+
+## audit
+
+Goal: close a premium audit with complete exposure data.
+
+1. Identify audit type (physical, phone, voluntary), period, and lines
+   (WC, GL, auto).
+2. Collect payroll by class, officer inclusion/exclusion, subcontracted
+   cost with certificates, sales, vehicle changes, and new entities.
+3. Reconcile figures to the original application or last endorsement.
+4. Draft an audit-response package and a client note on how additional
+   premium or return premium arises.
+5. Diary dispute deadlines; do not concede classification disputes without
+   producer review.
+
+## cancellation
+
+Goal: handle cancellation, non-renewal, or rewrite without silent uninsured
+periods.
+
+1. Capture who initiated (insured, carrier, finance company), reason, and
+   requested or statutory effective date.
+2. Check notice requirements, mortgagee/loss-payee, additional insured
+   holders, and premium-finance payoff.
+3. Identify replacement options or short-term coverage needs.
+4. Draft holder notifications only as drafts; confirm AMS certificate
+   holders against live records.
+5. List surplus-lines tax/stamping and finance-company notice items that
+   remain `unverified`.
+
+## proposal
+
+Goal: turn selected quotes into a client-facing proposal.
+
+1. Restate coverage intent from intake and contracts in force.
+2. Present recommended vs alternative options with the `quotes` matrix.
+3. Include binding requirements, payment plans, subjectivities, and
+   timeline to effective date.
+4. Attach a coverage-caveats page: exclusions, deductibles/SIR, claims-made
+   tails, and items still `unverified`.
+5. Load `artifact-templates.md` for the proposal outline; keep premiums
+   labeled `stated` from the quote documents.
+
+## schedules
+
+Goal: turn spreadsheets and AMS exports into usable exposure schedules.
+
+1. Load `schedules-and-exports.md` and classify the file (SOV, vehicles,
+   drivers, payroll, locations, claims, certificate holders).
+2. Normalize columns, flag missing required fields, and list duplicates
+   or impossible values.
+3. Produce a clean schedule table plus a data-quality report.
+4. Map the schedule to the lines it supports and name the next workflow
+   (`submission`, `endorsement`, `renewal`, or `audit`).
+5. Do not invent VINs, building values, class codes, or claim amounts.

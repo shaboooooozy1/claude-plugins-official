@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PROFILE_FILE=".claude/personalize.local.md"
+PROFILE_FILE="${CLAUDE_PROJECT_DIR}/.claude/personalize.local.md"
 
 if [[ ! -f "$PROFILE_FILE" ]]; then
   exit 0
@@ -26,9 +26,11 @@ frontmatter_match = re.match(r"\A---\s*\n(.*?)\n---(?:\s*\n|\Z)", profile, re.DO
 if not frontmatter_match:
     sys.exit(0)
 
+frontmatter = frontmatter_match.group(1).replace("\r\n", "\n").replace("\r", "\n")
+
 enabled_match = re.search(
-    r"(?mi)^[ \t]*enabled[ \t]*:[ \t]*(true|false)[ \t]*(?:#.*)?$",
-    frontmatter_match.group(1),
+    r"(?m)^enabled[ \t]*:[ \t]*(true|false)[ \t]*(?:#.*)?$",
+    frontmatter,
 )
 if not enabled_match or enabled_match.group(1).lower() != "true":
     sys.exit(0)

@@ -376,8 +376,8 @@
     },
     {
       "name": "commercial-insurance-broker",
-      "description": "Guided commercial P&C insurance broker workflows: new-business intake, market submissions, quote comparison, binding, policy checking, certificates, endorsements, renewals, and claims.",
-      "version": "1.0.0",
+      "description": "Guided commercial P&C insurance broker workflows: intake, submissions, quotes, binding, policy checking, certificates, contract review, endorsements, renewals, claims, BOR, audits, and exposure schedules.",
+      "version": "1.1.0",
       "author": {
         "name": "Anthropic",
         "email": "support@anthropic.com"

@@ -25,7 +25,7 @@ claude-plugins-official/
 - **LSP plugins** (12): `clangd-lsp`, `csharp-lsp`, `gopls-lsp`, `jdtls-lsp`, `kotlin-lsp`, `lua-lsp`, `php-lsp`, `pyright-lsp`, `ruby-lsp`, `rust-analyzer-lsp`, `swift-lsp`, `typescript-lsp`
 - **Output styles**: `explanatory-output-style`, `learning-output-style`
 - **Productivity & reporting**: `personalize` (per-project working preferences), `productivity-tracking` (goal/task session tracking via hooks), `session-report` (HTML usage report from local transcripts), `super-app` (unified search, fact-checking, research, and productivity integrations)
-- **Specialized**: `commercial-insurance-broker`, `example-plugin`, `math-olympiad`, `ralph-loop`
+- **Specialized**: `commercial-insurance-broker` (P&C broker workflows, contract review, schedules), `example-plugin`, `math-olympiad`, `ralph-loop`
 
 ### External Plugins (`/external_plugins`)
 
@@ -155,7 +155,7 @@ Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `Session
 
 ### Plugins with Agents
 
-7 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`, `super-app`.
+8 plugins define autonomous agents in `agents/` directories: `agent-sdk-dev`, `code-simplifier`, `commercial-insurance-broker`, `feature-dev`, `hookify`, `plugin-dev`, `pr-review-toolkit`, `super-app`.
 
 ### Plugins with Hooks
 
