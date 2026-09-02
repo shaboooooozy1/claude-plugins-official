@@ -33,7 +33,7 @@ if not frontmatter_match:
 frontmatter = frontmatter_match.group(1).replace("\r\n", "\n").replace("\r", "\n")
 
 enabled_match = re.search(
-    r"(?m)^enabled[ \t]*:[ \t]*(true|false)[ \t]*(?:#.*)?$",
+    r"(?mi)^enabled[ \t]*:[ \t]*(true|false)[ \t]*(?:#.*)?$",
     frontmatter,
 )
 if not enabled_match or enabled_match.group(1).lower() != "true":
