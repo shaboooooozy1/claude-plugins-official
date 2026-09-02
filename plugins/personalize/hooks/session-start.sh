@@ -20,7 +20,11 @@ import sys
 from pathlib import Path
 
 profile_path = Path(sys.argv[1])
-profile = profile_path.read_text(encoding="utf-8")
+try:
+    profile = profile_path.read_text(encoding="utf-8-sig")
+except (OSError, UnicodeDecodeError):
+    print(f"personalize: could not read {profile_path}", file=sys.stderr)
+    sys.exit(0)
 
 frontmatter_match = re.match(r"\A---\s*\n(.*?)\n---(?:\s*\n|\Z)", profile, re.DOTALL)
 if not frontmatter_match:
