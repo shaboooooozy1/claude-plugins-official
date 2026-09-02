@@ -982,6 +982,18 @@
       "homepage": "https://github.com/PagerDuty/claude-code-plugins"
     },
     {
+      "name": "personalize",
+      "description": "Capture per-project working preferences and apply them automatically at the start of every Claude Code session.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/personalize",
+      "category": "productivity",
+      "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/personalize"
+    },
+    {
       "name": "php-lsp",
       "description": "PHP language server (Intelephense) for code intelligence",
       "version": "1.0.0",

@@ -1,0 +1,9 @@
+{
+  "name": "personalize",
+  "description": "Capture per-project working preferences and apply them automatically at the start of every Claude Code session.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}
