@@ -217,11 +217,23 @@ Checks:
 - No duplicate plugin names
 - Alphabetical sort order
 
-Run locally:
+Marketplace validation now runs through the shared `validate-plugins` action
+(from `claude-plugins-community`) rather than repo-local scripts — the former
+`validate-marketplace.ts` and `check-marketplace-sorted.ts` no longer exist.
+
+Check locally with `jq`:
 ```bash
-bun .github/scripts/validate-marketplace.ts .claude-plugin/marketplace.json
-bun .github/scripts/check-marketplace-sorted.ts          # check only
-bun .github/scripts/check-marketplace-sorted.ts --fix     # auto-fix sort
+# valid JSON, and every entry has the required fields
+jq -e '.plugins | type == "array"' .claude-plugin/marketplace.json
+jq -e '(.plugins | map(select(.name and .description and .source)) | length) == (.plugins | length)' \
+  .claude-plugin/marketplace.json
+
+# no duplicate names
+jq -e '(.plugins | length) == ([.plugins[].name] | unique | length)' .claude-plugin/marketplace.json
+
+# case-insensitive alphabetical sort order
+jq -e '[.plugins[].name | ascii_downcase] == ([.plugins[].name | ascii_downcase] | sort)' \
+  .claude-plugin/marketplace.json
 ```
 
 ### 3. External PR Policy (`close-external-prs.yml`)
@@ -261,7 +273,7 @@ Internal plugins use Apache 2.0. Include a `LICENSE` file.
 3. Add an entry to `.claude-plugin/marketplace.json` (maintain alphabetical order)
 4. Include `README.md` and `LICENSE` (Apache 2.0)
 5. Validate frontmatter: `bun .github/scripts/validate-frontmatter.ts <files>`
-6. Validate marketplace: `bun .github/scripts/validate-marketplace.ts .claude-plugin/marketplace.json`
+6. Validate the marketplace entry with the `jq` checks under "Marketplace Validation" above
 
 ### Adding an External Plugin to the Marketplace
 
@@ -286,10 +298,17 @@ Or browse available plugins via `/plugin > Discover` in Claude Code.
 ### Validating All Changes Before Push
 
 ```bash
-bun .github/scripts/validate-marketplace.ts .claude-plugin/marketplace.json
-bun .github/scripts/check-marketplace-sorted.ts
+# marketplace: unique names, case-insensitive sort order, required fields
+jq -e '(.plugins | length) == ([.plugins[].name] | unique | length)' .claude-plugin/marketplace.json
+jq -e '[.plugins[].name | ascii_downcase] == ([.plugins[].name | ascii_downcase] | sort)' \
+  .claude-plugin/marketplace.json
+
+# frontmatter on any changed agent/skill/command files
 bun .github/scripts/validate-frontmatter.ts <changed-frontmatter-files>
 ```
+
+CI runs the authoritative checks through the shared `validate-plugins` action;
+the `jq` commands above cover the same marketplace invariants locally.
 
 ## Additional Resources
 
