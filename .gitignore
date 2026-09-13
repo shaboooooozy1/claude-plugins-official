@@ -1,2 +1,10 @@
 *.DS_Store
 .claude/
+
+# Installed dependencies (never committed).
+node_modules/
+
+# Transient deps installed into .github/scripts for the frontmatter validator
+# (mirrors CI, which runs `bun install yaml` on the fly).
+.github/scripts/package.json
+.github/scripts/bun.lock

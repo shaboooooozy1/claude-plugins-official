@@ -1,0 +1,11 @@
+{
+  "name": "Claude Code Plugin Marketplace",
+  "install": "./.cursor/install.sh",
+  "terminals": [
+    {
+      "name": "fakechat",
+      "command": "cd external_plugins/fakechat && \"$HOME/.bun/bin/bun\" run start",
+      "description": "Runnable fakechat MCP-server plugin; also serves a local web UI at http://localhost:8787 (override with FAKECHAT_PORT)."
+    }
+  ]
+}
