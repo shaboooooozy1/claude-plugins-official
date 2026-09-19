@@ -1,0 +1,9 @@
+{
+  "name": "changelog-keeper",
+  "description": "Create and maintain CHANGELOG.md files following the Keep a Changelog convention with slash commands for initializing, adding entries, and cutting releases",
+  "version": "1.0.0",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}
