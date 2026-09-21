@@ -844,10 +844,20 @@
             container.appendChild(sheetLabel);
           }
 
-          const htmlStr = XLSX.utils.sheet_to_html(ws, { editable: false });
-          const wrapper = document.createElement("div");
-          wrapper.innerHTML = htmlStr;
-          container.appendChild(wrapper);
+          // Build the table from cell values instead of sheet_to_html +
+          // innerHTML so spreadsheet content is never parsed as markup.
+          const rows = XLSX.utils.sheet_to_json(ws, { header: 1, raw: false, defval: "" });
+          const table = document.createElement("table");
+          for (const row of rows) {
+            const tr = document.createElement("tr");
+            for (const cell of row) {
+              const td = document.createElement("td");
+              td.textContent = String(cell);
+              tr.appendChild(td);
+            }
+            table.appendChild(tr);
+          }
+          container.appendChild(table);
         }
       } catch (err) {
         container.textContent = "Error rendering spreadsheet: " + err.message;
@@ -1097,9 +1107,14 @@
     }
 
     function escapeHtml(text) {
-      const div = document.createElement("div");
-      div.textContent = text;
-      return div.innerHTML;
+      // Also escapes quotes so the result is safe inside attribute values
+      // (e.g. title="..."), not only in element content.
+      return String(text ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
     }
 
     // ---- View switching ----
@@ -1289,7 +1304,7 @@
                   if (exp) {
                     const cls = exp.passed ? "benchmark-delta-positive" : "benchmark-delta-negative";
                     const icon = exp.passed ? "\u2713" : "\u2717";
-                    html += '<span class="' + cls + '" title="Run ' + run.run_number + ': ' + escapeHtml(exp.evidence || "") + '">' + icon + "</span> ";
+                    html += '<span class="' + cls + '" title="Run ' + escapeHtml(String(run.run_number)) + ': ' + escapeHtml(exp.evidence || "") + '">' + icon + "</span> ";
                   } else {
                     html += "— ";
                   }

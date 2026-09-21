@@ -276,7 +276,19 @@ def generate_html(
     if benchmark:
         embedded["benchmark"] = benchmark
 
-    data_json = json.dumps(embedded)
+    # The JSON is spliced into a <script> block, so escape the characters that
+    # could terminate it (e.g. "</script>" inside an eval output file) and the
+    # line/paragraph separators that are valid JSON but not valid JS string
+    # content. These are ordinary \u escapes, so JSON.parse and JS literals
+    # see identical data. Escape the serialized string, never the dict.
+    data_json = (
+        json.dumps(embedded)
+        .replace("<", "\\u003c")
+        .replace(">", "\\u003e")
+        .replace("&", "\\u0026")
+        .replace(" ", "\\u2028")
+        .replace(" ", "\\u2029")
+    )
 
     return template.replace("/*__EMBEDDED_DATA__*/", f"const EMBEDDED_DATA = {data_json};")
 
