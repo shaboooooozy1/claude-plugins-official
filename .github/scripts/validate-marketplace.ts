@@ -54,6 +54,27 @@ async function main() {
         errors.push(`plugins[${i}] (${entry.name ?? "?"}): missing required field "${field}"`);
       }
     }
+    // Every externally-hosted source must be pinned to an immutable commit.
+    // Unpinned entries would resolve to whatever the upstream branch points
+    // at when a user installs the plugin, so a compromised or repointed
+    // upstream repo could ship arbitrary code under this marketplace's name.
+    const src = entry.source;
+    if (typeof src === "string") {
+      if (!src.startsWith("./")) {
+        errors.push(`plugins[${i}] (${entry.name ?? "?"}): string source must be a local "./" path`);
+      }
+    } else if (src && typeof src === "object" && !Array.isArray(src)) {
+      const s = src as Record<string, unknown>;
+      if (s.source === "github") {
+        errors.push(
+          `plugins[${i}] (${entry.name ?? "?"}): "github" shorthand cannot be pinned; use {"source":"url","url":"https://github.com/<org>/<repo>.git","sha":"<40-hex>"}`
+        );
+      } else if (typeof s.sha !== "string" || !/^[0-9a-f]{40}$/.test(s.sha)) {
+        errors.push(
+          `plugins[${i}] (${entry.name ?? "?"}): external source must pin a 40-char lowercase commit "sha"`
+        );
+      }
+    }
     if (typeof entry.name === "string") {
       if (seen.has(entry.name)) {
         errors.push(`plugins[${i}]: duplicate plugin name "${entry.name}"`);
@@ -68,7 +89,9 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`OK: ${marketplace.plugins.length} plugins, no duplicates, all required fields present`);
+  console.log(
+    `OK: ${marketplace.plugins.length} plugins, no duplicates, all required fields present, all external sources sha-pinned`
+  );
 }
 
 main().catch((err) => {
