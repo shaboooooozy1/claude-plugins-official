@@ -17,3 +17,4 @@ node_modules/
 *.key
 *.p12
 *.pfx
+*credentials*.json

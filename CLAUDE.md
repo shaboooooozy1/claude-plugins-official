@@ -212,13 +212,15 @@ bun .github/scripts/validate-frontmatter.ts <file1> [file2...]
 
 ### 2. Marketplace Validation (`validate-marketplace.yml`)
 
-Triggered on changes to `.claude-plugin/marketplace.json`.
+Triggered on changes to `.claude-plugin/marketplace.json`, `external_plugins/*/.mcp.json`, or the validator scripts.
 
 Checks:
 - Valid JSON with `plugins` array
 - Required fields: `name`, `description`, `source`
 - No duplicate plugin names
 - Alphabetical sort order
+- Every non-`./` source pins a 40-hex commit `sha` (the `github` shorthand is rejected as unpinnable)
+- MCP launchers in `external_plugins/*/.mcp.json` are pinned: no `@latest`, no version-less `npx` package, no `git+` URL without a commit, no docker image without a digest
 
 Run locally:
 ```bash
