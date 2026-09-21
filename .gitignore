@@ -8,3 +8,12 @@ node_modules/
 # (mirrors CI, which runs `bun install yaml` on the fly).
 .github/scripts/package.json
 .github/scripts/bun.lock
+
+# Secrets: the runnable MCP servers read tokens from .env files (Bun auto-loads .env from cwd)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
