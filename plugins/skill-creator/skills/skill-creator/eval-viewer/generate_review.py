@@ -298,10 +298,14 @@ def generate_html(
 # ---------------------------------------------------------------------------
 
 def _kill_port(port: int) -> None:
-    """Kill any process listening on the given port."""
+    """Kill any process listening on the given TCP port (a previous viewer).
+
+    Only LISTEN sockets are matched so an unrelated process that merely has
+    a connection to that port number on some remote host is never signalled.
+    """
     try:
         result = subprocess.run(
-            ["lsof", "-ti", f":{port}"],
+            ["lsof", "-ti", f"tcp:{port}", "-sTCP:LISTEN"],
             capture_output=True, text=True, timeout=5,
         )
         for pid_str in result.stdout.strip().split("\n"):
@@ -359,6 +363,9 @@ class ReviewHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(content)
         elif self.path == "/api/feedback":
+            if not self._same_origin():
+                self.send_error(403)
+                return
             data = b"{}"
             if self.feedback_path.exists():
                 data = self.feedback_path.read_bytes()
@@ -370,8 +377,38 @@ class ReviewHandler(BaseHTTPRequestHandler):
         else:
             self.send_error(404)
 
+    def _same_origin(self) -> bool:
+        """Reject cross-site browser requests to the feedback API.
+
+        The server is loopback-only, but any web page the user has open could
+        still send requests to it. Browsers attach an Origin header to
+        cross-site fetches, so only the viewer's own origin (or requests with
+        no Origin, e.g. curl / same-origin GETs) are accepted. The Host header
+        is checked too so a DNS-rebinding page cannot reach the API either.
+        """
+        port = self.server.server_address[1]
+        allowed_origins = {f"http://127.0.0.1:{port}", f"http://localhost:{port}"}
+        allowed_hosts = {f"127.0.0.1:{port}", f"localhost:{port}"}
+        origin = self.headers.get("Origin")
+        if origin is not None and origin.strip().lower() not in allowed_origins:
+            return False
+        host = self.headers.get("Host", "").strip().lower()
+        if host not in allowed_hosts:
+            return False
+        return True
+
     def do_POST(self) -> None:
         if self.path == "/api/feedback":
+            # Require a JSON content type: a cross-site POST with this type
+            # triggers a CORS preflight that this server never answers, which
+            # removes the "simple request" CSRF path entirely.
+            ctype = self.headers.get("Content-Type", "").split(";")[0].strip().lower()
+            if ctype != "application/json":
+                self.send_error(415)
+                return
+            if not self._same_origin():
+                self.send_error(403)
+                return
             length = int(self.headers.get("Content-Length", 0))
             body = self.rfile.read(length)
             try:
