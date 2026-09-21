@@ -7,7 +7,7 @@ This repository is the **Claude Code Plugin Marketplace** — a curated director
 ### Toolchain
 
 - Everything runs on **Bun** (not Node/npm). Bun is installed at `~/.bun/bin/bun` and is on `PATH` via `~/.bashrc`, so `bun` works in fresh shells. The startup update script reinstalls Bun only if missing.
-- The frontmatter validator imports the `yaml` package, which is **not committed**. The update script installs it into `.github/scripts` (matching CI, which runs `bun install yaml` there on the fly). The resulting `.github/scripts/{package.json,bun.lock,node_modules}` are transient — **do not commit them**.
+- The frontmatter validator imports the `yaml` package, which is **not committed**. The update script installs it into `.github/scripts` (matching CI, which runs `bun install yaml@2.9.1` there on the fly; Bun itself is pinned to `bun-v1.3.11` in the bootstrap). The resulting `.github/scripts/{package.json,bun.lock,node_modules}` are transient — **do not commit them**.
 
 ### Validation = the repo's "lint/test/build"
 
