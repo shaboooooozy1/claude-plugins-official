@@ -45,3 +45,8 @@ served over HTTP.
 
 There's no history, no search, no access.json, no skill. Single browser tab,
 fresh on every reload. This is a dev tool, not a messaging bridge.
+
+The server listens on loopback only and accepts `/ws` and `/upload` requests
+solely from its own origin (`http://localhost:<port>`), so other web pages
+open in the same browser cannot inject messages into the session. Run it only
+while actively testing.
