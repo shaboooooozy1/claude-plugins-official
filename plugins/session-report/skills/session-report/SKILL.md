@@ -9,13 +9,13 @@ Produce a self-contained HTML report of Claude Code usage and save it to the cur
 
 ## Steps
 
-1. **Get data.** Run the bundled analyzer (default window: last 7 days; honor a different range if the user passed one, e.g. `24h`, `30d`, or `all`). The script `analyze-sessions.mjs` lives in the same directory as this SKILL.md — use its absolute path:
+1. **Get data.** Run the bundled analyzer (default window: last 7 days; honor a different range if the user passed one, e.g. `24h`, `30d`, or `all`). The script `analyze-sessions.mjs` lives in the same directory as this SKILL.md — use its absolute path. Write the output into a fresh private temp directory (`mktemp -d` creates it with mode 0700, so transcript-derived prompt text is never world-readable or pre-symlinkable) and print that path so later steps can reference it:
    ```sh
-   node <skill-dir>/analyze-sessions.mjs --json --since 7d > /tmp/session-report.json
+   REPORT_TMP=$(mktemp -d) && node <skill-dir>/analyze-sessions.mjs --json --since 7d > "$REPORT_TMP/session-report.json" && echo "$REPORT_TMP/session-report.json"
    ```
-   For all-time, omit `--since`.
+   For all-time, omit `--since`. Run this as a single command; the printed path is the one to use below.
 
-2. **Read** `/tmp/session-report.json`. Skim `overall`, `by_project`, `by_subagent_type`, `by_skill`, `cache_breaks`, `top_prompts`.
+2. **Read** the `session-report.json` path printed in step 1. Skim `overall`, `by_project`, `by_subagent_type`, `by_skill`, `cache_breaks`, `top_prompts`.
 
 3. **Copy the template** (also bundled alongside this SKILL.md) to the output path in the current working directory:
    ```sh
@@ -33,6 +33,8 @@ Produce a self-contained HTML report of Claude Code usage and save it to the cur
    - Do not restructure existing sections.
 
 5. **Report** the saved file path to the user. Do not open it or render it.
+
+6. **Clean up** the temp directory from step 1: `rm -rf "<the mktemp -d directory>"`.
 
 ## Notes
 

@@ -10,17 +10,27 @@ import random
 import sys
 from datetime import datetime
 
-# Debug log file
-DEBUG_LOG_FILE = "/tmp/security-warnings-log.txt"
+# Debug log file. Lives under the user's own ~/.claude rather than a fixed,
+# predictable path in world-writable /tmp, where another local user could
+# pre-create or symlink the file.
+DEBUG_LOG_FILE = os.path.join(
+    os.path.expanduser("~"), ".claude", "security-guidance", "debug.log"
+)
 
 
 def debug_log(message):
-    """Append debug message to log file with timestamp."""
+    """Append debug message to a user-private log file with timestamp."""
     try:
+        os.makedirs(os.path.dirname(DEBUG_LOG_FILE), mode=0o700, exist_ok=True)
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-        with open(DEBUG_LOG_FILE, "a") as f:
+        fd = os.open(
+            DEBUG_LOG_FILE,
+            os.O_APPEND | os.O_CREAT | os.O_WRONLY | getattr(os, "O_NOFOLLOW", 0),
+            0o600,
+        )
+        with os.fdopen(fd, "a") as f:
             f.write(f"[{timestamp}] {message}\n")
-    except Exception as e:
+    except Exception:
         # Silently ignore logging errors to avoid disrupting the hook
         pass
 
