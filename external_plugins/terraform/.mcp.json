@@ -6,7 +6,7 @@
       "-i",
       "--rm",
       "-e", "TFE_TOKEN=${TFE_TOKEN}",
-      "hashicorp/terraform-mcp-server:0.4.0"
+      "hashicorp/terraform-mcp-server:0.4.0@sha256:a572ea31c470fede3749c21b4e8ac39ec769189332a08a5e9f81792d3f4db406"
     ]
   }
 }

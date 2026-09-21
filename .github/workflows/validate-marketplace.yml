@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - '.claude-plugin/marketplace.json'
+      - 'external_plugins/*/.mcp.json'
+      - '.github/scripts/validate-marketplace.ts'
+      - '.github/scripts/check-marketplace-sorted.ts'
 
 permissions:
   contents: read

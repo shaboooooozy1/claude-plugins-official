@@ -1,6 +1,6 @@
 {
   "firebase": {
     "command": "npx",
-    "args": ["-y", "firebase-tools@latest", "mcp"]
+    "args": ["-y", "firebase-tools@15.30.2", "mcp"]
   }
 }
