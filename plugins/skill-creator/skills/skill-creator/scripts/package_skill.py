@@ -91,7 +91,17 @@ def package_skill(skill_path, output_dir=None):
         with zipfile.ZipFile(skill_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
             # Walk through the skill directory, excluding build artifacts
             for file_path in skill_path.rglob('*'):
+                # Never follow symlinks: a link inside the skill folder could
+                # otherwise pull files from outside it (e.g. credentials) into
+                # the published archive. The containment check also covers
+                # directory symlinks that rglob may traverse on older Pythons.
+                if file_path.is_symlink():
+                    print(f"  Skipped symlink: {file_path.relative_to(skill_path.parent)}")
+                    continue
                 if not file_path.is_file():
+                    continue
+                if not file_path.resolve().is_relative_to(skill_path.resolve()):
+                    print(f"  Skipped (outside skill dir): {file_path.relative_to(skill_path.parent)}")
                     continue
                 arcname = file_path.relative_to(skill_path.parent)
                 if should_exclude(arcname):

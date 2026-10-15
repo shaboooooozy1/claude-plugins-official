@@ -8,6 +8,7 @@ for a set of queries. Outputs results as JSON.
 import argparse
 import json
 import os
+import re
 import select
 import subprocess
 import sys
@@ -48,10 +49,15 @@ def run_single_query(
     stream events (content_block_start) rather than waiting for the
     full assistant message, which only arrives after tool execution.
     """
+    # The name comes from SKILL.md frontmatter; reduce it to a safe slug
+    # before using it in a filesystem path so "../" or separators cannot
+    # escape the .claude/commands directory.
+    safe_name = re.sub(r"[^a-z0-9-]", "", str(skill_name).lower()).strip("-")[:64] or "skill"
     unique_id = uuid.uuid4().hex[:8]
-    clean_name = f"{skill_name}-skill-{unique_id}"
+    clean_name = f"{safe_name}-skill-{unique_id}"
     project_commands_dir = Path(project_root) / ".claude" / "commands"
     command_file = project_commands_dir / f"{clean_name}.md"
+    assert command_file.resolve().is_relative_to(project_commands_dir.resolve())
 
     try:
         project_commands_dir.mkdir(parents=True, exist_ok=True)

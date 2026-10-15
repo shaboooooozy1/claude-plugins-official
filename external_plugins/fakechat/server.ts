@@ -3,7 +3,7 @@
  * Fake chat for Claude Code.
  *
  * Localhost web UI for testing the channel contract. No external service,
- * no tokens, no access control.
+ * no tokens; browser requests are limited to the page's own origin.
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js'
@@ -21,6 +21,14 @@ const PORT = Number(process.env.FAKECHAT_PORT ?? 8787)
 const STATE_DIR = join(homedir(), '.claude', 'channels', 'fakechat')
 const INBOX_DIR = join(STATE_DIR, 'inbox')
 const OUTBOX_DIR = join(STATE_DIR, 'outbox')
+
+// The server binds to loopback, but any web page the developer has open can
+// still reach it. Browsers always send an Origin header on WebSocket
+// handshakes and fetch POSTs, so only the bundled page's own origin may open
+// /ws or post to /upload. A missing Origin is rejected too: allowing it would
+// let non-browser cross-origin callers inject text into the agent session.
+const ALLOWED_ORIGINS = new Set([`http://localhost:${PORT}`, `http://127.0.0.1:${PORT}`, `http://[::1]:${PORT}`])
+const sameOrigin = (req: Request) => ALLOWED_ORIGINS.has(req.headers.get('origin') ?? '')
 
 type Msg = {
   id: string
@@ -154,6 +162,7 @@ Bun.serve({
     const url = new URL(req.url)
 
     if (url.pathname === '/ws') {
+      if (!sameOrigin(req)) return new Response('forbidden', { status: 403 })
       if (server.upgrade(req)) return
       return new Response('upgrade failed', { status: 400 })
     }
@@ -171,6 +180,7 @@ Bun.serve({
     }
 
     if (url.pathname === '/upload' && req.method === 'POST') {
+      if (!sameOrigin(req)) return new Response('forbidden', { status: 403 })
       return (async () => {
         const form = await req.formData()
         const id = String(form.get('id') ?? '')
@@ -276,7 +286,10 @@ function line(who, text, replyTo, file) {
   const div = document.createElement('div')
   const t = new Date().toTimeString().slice(0, 8)
   const reply = replyTo && msgs[replyTo] ? ' ↳ ' + (msgs[replyTo].body.textContent || '(file)').slice(0, 40) : ''
-  div.innerHTML = '[' + t + '] <b>' + who + '</b>' + reply + ': <span class=body></span>'
+  div.append('[' + t + '] ')
+  const b = document.createElement('b'); b.textContent = who; div.appendChild(b)
+  div.append(reply + ': ')
+  const span = document.createElement('span'); span.className = 'body'; div.appendChild(span)
   const body = div.querySelector('.body')
   body.textContent = text || ''
   if (file) {

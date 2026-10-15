@@ -6,7 +6,7 @@ The MCP server logs into Telegram as a bot and provides tools to Claude to reply
 
 ## Prerequisites
 
-- [Bun](https://bun.sh) — the MCP server runs on Bun. Install with `curl -fsSL https://bun.sh/install | bash`.
+- [Bun](https://bun.sh) — the MCP server runs on Bun. Install with `curl -fsSL https://bun.sh/install | bash -s "bun-v1.3.11"` (the version this repo is tested with).
 
 ## Quick Setup
 > Default pairing flow for a single-user DM bot. See [ACCESS.md](./ACCESS.md) for groups and multi-user setups.

@@ -166,7 +166,7 @@ Valid hook events: `PreToolUse`, `PostToolUse`, `Stop`, `SubagentStop`, `Session
 `.claude-plugin/marketplace.json` is the single source of truth for the plugin directory. It contains **144 registered plugins**:
 
 - **53 local entries** pointing to directories in this repo (37 in `/plugins`, 16 in `/external_plugins`)
-- **91 externally-hosted entries** (72 `url`, 18 `git-subdir`, 1 `github`)
+- **91 externally-hosted entries** (73 `url`, 18 `git-subdir`), every one pinned to a 40-hex commit `sha`
 
 Note: all 37 directories in `/plugins` are registered, including `plugins/example-plugin` (the reference implementation, under the `development` category).
 
@@ -180,15 +180,15 @@ Source types:
 // Local plugin (string form)
 "source": "./plugins/plugin-name"
 
-// External git repo with pinned sha
+// External git repo with pinned sha (a 40-hex commit `sha` is mandatory for
+// every non-"./" source and is enforced by validate-marketplace.ts in CI)
 "source": { "source": "url", "url": "https://github.com/org/repo.git", "sha": "..." }
 
 // Git subdirectory (plugin lives inside a larger repo)
 "source": { "source": "git-subdir", "url": "org/repo", "path": "plugins/name", "ref": "main", "sha": "..." }
-
-// GitHub shorthand
-"source": { "source": "github", "repo": "org/repo" }
 ```
+
+The `{ "source": "github", "repo": "org/repo" }` shorthand is rejected by CI because it has no pin slot; use the `url` form with a `sha` instead.
 
 ## CI/CD & Validation
 
@@ -212,13 +212,15 @@ bun .github/scripts/validate-frontmatter.ts <file1> [file2...]
 
 ### 2. Marketplace Validation (`validate-marketplace.yml`)
 
-Triggered on changes to `.claude-plugin/marketplace.json`.
+Triggered on changes to `.claude-plugin/marketplace.json`, `external_plugins/*/.mcp.json`, or the validator scripts.
 
 Checks:
 - Valid JSON with `plugins` array
 - Required fields: `name`, `description`, `source`
 - No duplicate plugin names
 - Alphabetical sort order
+- Every non-`./` source pins a 40-hex commit `sha` (the `github` shorthand is rejected as unpinnable)
+- MCP launchers in `external_plugins/*/.mcp.json` are pinned: no `@latest`, no version-less `npx` package, no `git+` URL without a commit, no docker image without a digest
 
 Run locally:
 ```bash
